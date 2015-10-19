@@ -5,17 +5,21 @@ namespace Framework;
 use Framework\Router\Router;
 
 class Application {
-    
-	private $config;
-    
-    function __construct ($config) {
-	
-		$this->config = require_once($config);
+
+    private $configs;
+
+    function __construct($config) {
+
+        $this->configs = require_once($config);
         
     }
-    
-    function run(){
-		
-        $router = new Router($this->config['routes']);
+
+    function run() {
+                
+        $router = new Router($this->configs['routes']);
+        $route = $router->start($_SERVER['REQUEST_URI']);
+        
+        
     }
+
 }
